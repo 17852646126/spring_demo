@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+
+>       <!--default-init-method="start"
+       default-destroy-method="end"--><!--默认的初始化和销毁方法-->
+
+
+    <bean id="helloWorld123456" class="com.major.HelloWorld" scope="prototype" init-method="start" destroy-method="end">
+        <!--scope作用域：默认singleton单例，prototype每次新建-->
+        <!--init-method="start" destroy-method="end"实例Bean时和销毁容器时调用的方法-->
+        <property name="message" value="Hello World!"/>
+        <property name="message1" value="Hello World111!"/>
+    </bean>
+
+    <bean id="abstractDemo" abstract="true"><!--抽象父类，不需要写一个新的文件，不能实例只能继承-->
+        <property name="message1" value="Hello World111!"/>
+        <property name="message2" value="Hello World!222"/>
+        <property name="message3" value="Hello World!333"/>
+    </bean>
+
+    <bean id="hello123456" class="com.major.Hello" parent="abstractDemo"><!--子类中必须有父类的所有变量属性-->
+        <property name="message" value="Hello!"/>
+        <property name="message2" value="Hello222!"/>
+    </bean>
+
+
+
+    <bean class="com.major.InitHelloWorld" />
+</beans>

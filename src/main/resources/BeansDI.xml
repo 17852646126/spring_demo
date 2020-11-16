@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+
+    <bean id="textEditor" class="com.major.dI.TextEditor">
+        <property name="str2" value="str2的值"></property>
+        <constructor-arg name="spellChecker"><!--内部Bean-->
+            <bean id="spellChecker" class="com.major.dI.SpellChecker"></bean>
+        </constructor-arg>
+        <constructor-arg type="java.lang.String" value="str1的值"></constructor-arg>
+        <!--把一个引用传递给一个对象,使用 ref 属性-->
+        <!--传递一个值,使用 value 属性-->
+        <!--传入内部Bean或配置基本数据类型时，用name-->
+    </bean>
+
+    <bean id="address1" class="com.major.dI.SpellChecker"></bean>
+    <bean id="address2" class="com.major.dI.SpellChecker"></bean>
+
+
+    <bean id="javaCollection" class="com.major.dI.JavaCollection">
+        <property name="addressList">
+            <list>
+                <value>INDIA</value>
+                <ref bean="address1"/>
+                <ref bean="address2"/>
+            </list>
+        </property>
+
+        <!-- results in a setAddressSet(java.util.Set) call -->
+        <property name="addressSet">
+            <set>
+                <value>INDIA</value>
+                <value>Pakistan</value>
+                <ref bean="address1"/>
+                <ref bean="address2"/>
+            </set>
+        </property>
+
+        <!-- results in a setAddressMap(java.util.Map) call -->
+        <property name="addressMap">
+            <map>
+                <entry key="1" value="INDIA"/>
+                <entry key="2" value="Pakistan"/>
+                <entry key="3" value-ref="address1"/>
+                <entry key="4" value-ref="address2"/>
+            </map>
+        </property>
+
+        <!-- results in a setAddressProp(java.util.Properties) call -->
+        <property name="addressProp">
+            <props>
+                <prop key="one">INDIA</prop>
+                <prop key="two">Pakistan</prop>
+                <prop key="three">address1</prop>
+                <prop key="four">address2</prop>
+            </props>
+        </property>
+
+    </bean>
+</beans>
